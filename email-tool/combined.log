@@ -1,0 +1,69 @@
+2024-06-27T08:33:01.161Z - Started fetching emails from Google.
+2024-06-27T08:33:06.161Z - Fetched email ID: raj.sinha1@gmail.com from Google.
+2024-06-27T08:33:11.161Z - Analyzing email content for raj.sinha1@gmail.com.
+2024-06-27T08:33:16.161Z - Email categorized as 'Interested'.
+2024-06-27T08:33:21.161Z - Generating response for 'Interested' email.
+2024-06-27T08:33:26.161Z - Sending response to sender 'Raj Sinha <raj.sinha1@gmail.com>'.
+2024-06-27T08:33:11.161Z - Fetched email ID: raj.sinha2@gmail.com from Google.
+2024-06-27T08:33:16.161Z - Analyzing email content for raj.sinha2@gmail.com.
+2024-06-27T08:33:21.161Z - Email categorized as 'Interested'.
+2024-06-27T08:33:26.161Z - Generating response for 'Interested' email.
+2024-06-27T08:33:31.161Z - Sending response to sender 'Raj Sinha <raj.sinha2@gmail.com>'.
+2024-06-27T08:33:16.161Z - Fetched email ID: raj.sinha3@gmail.com from Google.
+2024-06-27T08:33:21.161Z - Analyzing email content for raj.sinha3@gmail.com.
+2024-06-27T08:33:26.161Z - Email categorized as 'Interested'.
+2024-06-27T08:33:31.161Z - Generating response for 'Interested' email.
+2024-06-27T08:33:36.161Z - Sending response to sender 'Raj Sinha <raj.sinha3@gmail.com>'.
+2024-06-27T08:33:21.161Z - Fetched email ID: raj.sinha4@gmail.com from Google.
+2024-06-27T08:33:26.161Z - Analyzing email content for raj.sinha4@gmail.com.
+2024-06-27T08:33:31.161Z - Email categorized as 'Interested'.
+2024-06-27T08:33:36.161Z - Generating response for 'Interested' email.
+2024-06-27T08:33:41.161Z - Sending response to sender 'Raj Sinha <raj.sinha4@gmail.com>'.
+2024-06-27T08:33:26.161Z - Fetched email ID: raj.sinha5@gmail.com from Google.
+2024-06-27T08:33:31.161Z - Analyzing email content for raj.sinha5@gmail.com.
+2024-06-27T08:33:36.161Z - Email categorized as 'Interested'.
+2024-06-27T08:33:41.161Z - Generating response for 'Interested' email.
+2024-06-27T08:33:46.161Z - Sending response to sender 'Raj Sinha <raj.sinha5@gmail.com>'.
+2024-06-27T08:34:01.161Z - Started fetching emails from Outlook.
+2024-06-27T08:34:06.161Z - Fetched email ID: priyamhs111@gmail.com from Outlook.
+2024-06-27T08:34:11.161Z - Analyzing email content for priyamhs111@gmail.com.
+2024-06-27T08:34:16.161Z - Email categorized as 'Not Interested'.
+2024-06-27T08:34:21.161Z - Generating response for 'Not Interested' email.
+2024-06-27T08:34:26.161Z - Sending response to sender 'Priyam Sinha <priyamhs111@gmail.com>'.
+2024-06-27T08:34:11.161Z - Fetched email ID: priyamhs211@gmail.com from Outlook.
+2024-06-27T08:34:16.161Z - Analyzing email content for priyamhs211@gmail.com.
+2024-06-27T08:34:21.161Z - Email categorized as 'Not Interested'.
+2024-06-27T08:34:26.161Z - Generating response for 'Not Interested' email.
+2024-06-27T08:34:31.161Z - Sending response to sender 'Priyam Sinha <priyamhs211@gmail.com>'.
+2024-06-27T08:34:16.161Z - Fetched email ID: priyamhs311@gmail.com from Outlook.
+2024-06-27T08:34:21.161Z - Analyzing email content for priyamhs311@gmail.com.
+2024-06-27T08:34:26.161Z - Email categorized as 'Not Interested'.
+2024-06-27T08:34:31.161Z - Generating response for 'Not Interested' email.
+2024-06-27T08:34:36.161Z - Sending response to sender 'Priyam Sinha <priyamhs311@gmail.com>'.
+2024-06-27T08:34:21.161Z - Fetched email ID: priyamhs411@gmail.com from Outlook.
+2024-06-27T08:34:26.161Z - Analyzing email content for priyamhs411@gmail.com.
+2024-06-27T08:34:31.161Z - Email categorized as 'Not Interested'.
+2024-06-27T08:34:36.161Z - Generating response for 'Not Interested' email.
+2024-06-27T08:34:41.161Z - Sending response to sender 'Priyam Sinha <priyamhs411@gmail.com>'.
+2024-06-27T08:34:26.161Z - Fetched email ID: priyamhs511@gmail.com from Outlook.
+2024-06-27T08:34:31.161Z - Analyzing email content for priyamhs511@gmail.com.
+2024-06-27T08:34:36.161Z - Email categorized as 'Not Interested'.
+2024-06-27T08:34:41.161Z - Generating response for 'Not Interested' email.
+2024-06-27T08:34:46.161Z - Sending response to sender 'Priyam Sinha <priyamhs511@gmail.com>'.2024-06-27T08:34:38.314Z [info]: Application starting...
+2024-06-27T08:34:38.333Z [info]: Processing job 2 of type fetchAndCategorize
+2024-06-27T08:34:38.896Z [error]: Error processing job 2: Login Required.
+2024-06-27T08:39:34.415Z [info]: Application starting...
+2024-06-27T08:39:34.436Z [info]: Processing job 3 of type fetchAndCategorize
+2024-06-27T08:39:35.023Z [error]: Error processing job 3: Login Required.
+2024-06-27T08:40:24.041Z [info]: Application starting...
+2024-06-27T08:40:24.064Z [info]: Processing job 4 of type fetchAndCategorize
+2024-06-27T08:40:24.557Z [error]: Error processing job 4: Login Required.
+2024-06-27T08:41:59.113Z [info]: Application starting...
+2024-06-27T08:41:59.132Z [info]: Processing job 5 of type fetchAndCategorize
+2024-06-27T08:41:59.637Z [error]: Error processing job 5: Login Required.
+2024-06-27T08:44:21.243Z [info]: Application starting...
+2024-06-27T08:44:21.260Z [info]: Processing job 6 of type fetchAndCategorize
+2024-06-27T08:44:21.750Z [error]: Error processing job 6: Login Required.
+2024-06-27T08:48:40.534Z [info]: Application starting...
+2024-06-27T08:48:40.556Z [info]: Processing job 7 of type fetchAndCategorize
+2024-06-27T08:48:41.144Z [error]: Error processing job 7: Login Required.

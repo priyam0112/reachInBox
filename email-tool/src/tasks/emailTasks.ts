@@ -1,75 +1,83 @@
+// src/tasks/emailTasks.ts
 import { Queue, Worker } from 'bullmq';
+import logger from '../logger';
 import { fetchEmailsGoogle, fetchEmailsOutlook, sendEmailGoogle, sendEmailOutlook } from '../services/emailService';
 import { analyzeEmail, generateResponse } from '../services/openaiService';
 import { getGoogleToken } from '../auth/google';
 import { getOutlookToken } from '../auth/outlook';
 import { google } from 'googleapis';
 import { Client } from '@microsoft/microsoft-graph-client';
-import 'isomorphic-fetch';
-import IORedis from 'ioredis';
 
-const redisConfig = {
-  host: '127.0.0.1',
-  port: 6379
-};
-
-const connection = new IORedis(redisConfig);
-
-const emailQueue = new Queue('emailQueue', { connection });
-
-emailQueue.add('fetchAndCategorize', {});
+export const emailQueue = new Queue('emailQueue', {
+  connection: {
+    host: '127.0.0.1',
+    port: 6379
+  }
+});
 
 const worker = new Worker('emailQueue', async job => {
+  logger.info(`Processing job ${job.id} of type ${job.name}`);
   if (job.name === 'fetchAndCategorize') {
-    // Fetch and categorize emails for Google
-    const googleAuth = await getGoogleToken(process.env.YOUR_GOOGLE_AUTH_CODE!); // Get the OAuth2 client
-    const googleEmails = await fetchEmailsGoogle(googleAuth);
-    for (const email of googleEmails) {
-      const content = await getEmailContent(googleAuth, email.id!);
-      const { from, subject } = getEmailHeaders(content);
-      if (!from || !subject) continue; // Skip if headers are missing
+    try {
+      // Fetch and categorize emails for Google
+      const googleAuth = await getGoogleToken(process.env.YOUR_GOOGLE_AUTH_CODE!);
+      const googleEmails = await fetchEmailsGoogle(googleAuth);
+      for (const email of googleEmails) {
+        const content = await getEmailContent(googleAuth, email.id!);
+        const { from, subject } = getEmailHeaders(content);
+        if (!from || !subject) continue; // Skip if headers are missing
 
-      const category = await analyzeEmail(content.snippet || '');
-      let response = '';
-      switch (category) {
-        case 'Interested':
-          response = await generateResponse('Generate a response for an interested email');
-          break;
-        case 'Not Interested':
-          response = await generateResponse('Generate a response for a not interested email');
-          break;
-        case 'More Information':
-          response = await generateResponse('Generate a response for an email asking for more information');
-          break;
+        const category = await analyzeEmail(content.snippet  || ' ' );
+        let response = '';
+        switch (category) {
+          case 'Interested':
+            response = await generateResponse('Generate a response for an interested email');
+            break;
+          case 'Not Interested':
+            response = await generateResponse('Generate a response for a not interested email');
+            break;
+          case 'More Information':
+            response = await generateResponse('Generate a response for an email asking for more information');
+            break;
+        }
+        await sendEmailGoogle(googleAuth, from, 'Re: ' + subject, response);
+        logger.info(`Processed email from ${from} with subject ${subject}`);
       }
-      await sendEmailGoogle(googleAuth, from, 'Re: ' + subject, response);
-    }
 
-    // Fetch and categorize emails for Outlook
-    const outlookToken = await getOutlookToken(process.env.YOUR_OUTLOOK_AUTH_CODE!); // Get the access token
-    const outlookEmails = await fetchEmailsOutlook(outlookToken);
-    for (const email of outlookEmails) {
-      const content = await getEmailContentOutlook(outlookToken, email.id!);
-      const { from, subject } = getEmailHeadersOutlook(email);
-      if (!from || !subject) continue; // Skip if headers are missing
+      // Fetch and categorize emails for Outlook
+      const outlookToken = await getOutlookToken(process.env.YOUR_OUTLOOK_AUTH_CODE!);
+      const outlookEmails = await fetchEmailsOutlook(outlookToken);
+      for (const email of outlookEmails) {
+        const content = await getEmailContentOutlook(outlookToken, email.id!);
+        const { from, subject } = getEmailHeadersOutlook(email);
+        if (!from || !subject) continue; // Skip if headers are missing
 
-      const category = await analyzeEmail(content);
-      let response = '';
-      switch (category) {
-        case 'Interested':
-          response = await generateResponse('Generate a response for an interested email');
-          break;
-        case 'Not Interested':
-          response = await generateResponse('Generate a response for a not interested email');
-          break;
-        case 'More Information':
-          response = await generateResponse('Generate a response for an email asking for more information');
-          break;
+        const category = await analyzeEmail(content);
+        let response = '';
+        switch (category) {
+          case 'Interested':
+            response = await generateResponse('Generate a response for an interested email');
+            break;
+          case 'Not Interested':
+            response = await generateResponse('Generate a response for a not interested email');
+            break;
+          case 'More Information':
+            response = await generateResponse('Generate a response for an email asking for more information');
+            break;
+        }
+        await sendEmailOutlook(outlookToken, from, 'Re: ' + subject, response);
+        logger.info(`Processed email from ${from} with subject ${subject}`);
       }
-      await sendEmailOutlook(outlookToken, from, 'Re: ' + subject, response);
+    } catch (error) {
+      logger.error(`Error processing job ${job.id}: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
-}, { connection });
+}, {
+  connection: {
+    host: '127.0.0.1',
+    port: 6379
+  }
+});
 
 async function getEmailContent(auth: any, messageId: string) {
   const gmail = google.gmail({ version: 'v1', auth });
